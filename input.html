@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function validateTestForm() {
+	var url = document.forms["test"]["url_test"].value;
+	if (url==null||url=="") {
+		alert("URL must be filled out.");
+		return false;
+	}
+}
+
+function validateLongTestForm() {
+	var url = document.forms["testLong"]["url_test"].value;
+	if (url==null||url=="") {
+		alert("URL must be filled out.");
+		return false;
+	}
+}
+
+function validateForm() {
+	
+	var url = document.forms["input"]["url"].value;
+	if (url==null||url=="") {
+		alert("URL must be filled out.");
+		return false;
+	}
+
+	var email = document.forms["input"]["email"].value;
+	var atpos = email.indexOf("@");
+	var dotpos = email.lastIndexOf(".");
+	if (atpos<1 || dotpos<atpos+2 || dotpos+2>=email.length) {
+		alert("Not a valid e-mail address.");
+		return false;
+	}
+
+	var regex = new RegExp("([0-1][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])");	
+	var start_time = document.forms["input"]["start_time"].value;
+	if (regex.test(start_time)) {
+	} else {
+		alert("Please check time format HH:MM:SS.");
+		return false;
+	}
+			
+	var end_time = document.forms["input"]["end_time"].value;
+	if (regex.test(end_time)) {
+	} else {
+		alert("Please check time format HH:MM:SS.");
+		return false;
+	}
+	
+	if (end_time <= start_time) {
+		alert("End time should exceed the start time.");
+		return false;
+	}
+	
+/*
+	if (end_time - start_time >= 10) {
+		alert("Please narrow the time interval within 10s.");
+		return false;
+	}
+*/
+	
+	var radios = document.getElementsByName("label");
+	var chkd = false;
+	for (var i=0; i < radios.length; i++) {
+		if (radios[i].checked) {
+			chkd = true;
+		}
+	}
+	if (chkd == true) {
+	} else {
+		alert("Please check a label.");
+		return false;
+	}
+
+}
+
+function validateLongForm() {
+	
+	var url = document.forms["input_long"]["url"].value;
+	if (url==null||url=="") {
+		alert("URL must be filled out.");
+		return false;
+	}
+
+	var email = document.forms["input_long"]["email"].value;
+	var atpos = email.indexOf("@");
+	var dotpos = email.lastIndexOf(".");
+	if (atpos<1 || dotpos<atpos+2 || dotpos+2>=email.length) {
+		alert("Not a valid e-mail address.");
+		return false;
+	}
+
+	var regex = new RegExp("([0-1][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])");	
+	var start_time = document.forms["input_long"]["start_time"].value;
+	if (regex.test(start_time)) {
+	} else {
+		alert("Please check time format HH:MM:SS.");
+		return false;
+	}
+			
+	var end_time = document.forms["input_long"]["end_time"].value;
+	if (regex.test(end_time)) {
+	} else {
+		alert("Please check time format HH:MM:SS.");
+		return false;
+	}
+	
+	if (end_time <= start_time) {
+		alert("End time should exceed the start time.");
+		return false;
+	}
+	
+/*
+	if (end_time - start_time >= 10) {
+		alert("Please narrow the time interval within 10s.");
+		return false;
+	}
+
+	
+	var radios = document.getElementsByName("labels");
+	var chkd = false;
+	for (var i=0; i < radios.length; i++) {
+		if (radios[i].checked) {
+			chkd = true;
+		}
+	}
+	if (chkd == true) {
+	} else {
+		alert("Please check a label.");
+		return false;
+	}
+*/
+
+}
+
+
+function validateWorkForm() {
+	var email = document.forms["work"]["email_check"].value;
+	var atpos = email.indexOf("@");
+	var dotpos = email.lastIndexOf(".");
+	if (atpos<1 || dotpos<atpos+2 || dotpos+2>=email.length) {
+		alert("Not a valid e-mail address.");
+		return false;
+	}
+}
+
+</script>
+</head>
+<body>
+
+<h1><center>Video Collection Web</center></h1>
+
+<hr>
+<h2><center>URL Long Verification</center></h2>
+<form name="testLong" action="verify_long.php" onsubmit="return validateLongTestForm()" method="get">
+URL: <input type="url" name="url_test">
+<input type="submit" value="Verify">
+</form>
+<p>Please verify your URL before filling the data submit form to save your time. Our database is continually increasing and we only accept new videos. </p>
+
+<hr>
+<h2><center>Data Submit Form (Long Videos)</center></h2>
+<p>We will also collect few long videos (30s~90s) that contain mixed actors and actions...</p>
+
+<form name="input_long" action="helloworld_long.php" onsubmit="return validateLongForm()" method="get">
+
+<fieldset>
+<legend><b>Basic Information</b></legend>
+URL: <input type="url" name="url"><br>
+Your UB Email: <input type="text" name="email"> <br>
+</fieldset>
+<br>
+<fieldset>
+<legend><b>Time Interval</b></legend>
+<i>Please locate a 3s-8s time interval.</i><br>
+Start Time: <input type="text" name="start_time"> (HH:MM:SS) <br>
+End Time: <input type="text" name="end_time"> (HH:MM:SS) <br>
+</fieldset>
+<br>
+<fieldset>
+<legend><b>Label the primary action in the time interval of the video</b></legend>
+<table border="1">
+<tr>
+<th>Adult</th>
+<th>Baby</th>
+<th>Ball</th>
+<th>Bird</th>
+<th>Car</th>
+<th>Cat</th>
+<th>Dog</th>
+</tr>
+<tr>
+<td>
+<input type = "checkbox" name="11" value="1">climbing<br>
+<input type = "checkbox" name="12" value="1">crawling<br>
+<input type = "checkbox" name="13" value="1">eating<br>
+<input type = "checkbox" name="15" value="1">jumping<br>
+<input type = "checkbox" name="16" value="1">rolling<br>
+<input type = "checkbox" name="17" value="1">running<br>
+<input type = "checkbox" name="18" value="1">walking<br>
+</td>
+<td>
+<input type = "checkbox" name="21" value="1">climbing<br>
+<input type = "checkbox" name="22" value="1">crawling<br>
+<input type = "checkbox" name="26" value="1">rolling<br>
+<input type = "checkbox" name="28" value="1">walking<br>
+</td>
+<td>
+<input type = "checkbox" name="34" value="1">flying<br>
+<input type = "checkbox" name="35" value="1">bouncing<br>
+<input type = "checkbox" name="36" value="1">rolling<br>
+</td>
+<td>
+<input type = "checkbox" name="41" value="1">climbing<br>
+<input type = "checkbox" name="43" value="1">eating<br>
+<input type = "checkbox" name="44" value="1">flying<br>
+<input type = "checkbox" name="45" value="1">jumping<br>
+<input type = "checkbox" name="46" value="1">rolling<br>
+<input type = "checkbox" name="48" value="1">walking<br>
+</td>
+<td>
+<input type = "checkbox" name="54" value="1">flying<br>
+<input type = "checkbox" name="55" value="1">bouncing<br>
+<input type = "checkbox" name="56" value="1">rolling<br>
+<input type = "checkbox" name="57" value="1">running<br>
+</td>
+<td>
+<input type = "checkbox" name="61" value="1">climbing<br>
+<input type = "checkbox" name="63" value="1">eating<br>
+<input type = "checkbox" name="65" value="1">jumping<br>
+<input type = "checkbox" name="66" value="1">rolling<br>
+<input type = "checkbox" name="67" value="1">running<br>
+<input type = "checkbox" name="68" value="1">walking<br>
+</td>
+<td>
+<input type = "checkbox" name="72" value="1">crawling<br>
+<input type = "checkbox" name="73" value="1">eating<br>
+<input type = "checkbox" name="75" value="1">jumping<br>
+<input type = "checkbox" name="76" value="1">rolling<br>
+<input type = "checkbox" name="77" value="1">running<br>
+<input type = "checkbox" name="78" value="1">walking<br>
+</td>
+</tr>
+</table>
+</fieldset>
+
+<center><p>Please verfiy your information before submit.</p></center>
+<center><input type="submit" value="Submit"></center>
+</form>
+
+<hr>
+<a href="longstatus.php"><h2><center>Long Database Status</center></h2></a>
+<p>This is used to check the current status of our video collection database.</p>
+
+<hr>
+<h2><center>URL Verification</center></h2>
+<form name="test" action="verify.php" onsubmit="return validateTestForm()" method="get">
+URL: <input type="url" name="url_test">
+<input type="submit" value="Verify">
+</form>
+<p>Please verify your URL before filling the data submit form to save your time. Our database is continually increasing and we only accept new videos. </p>
+
+<hr>
+<h2><center>Data Submit Form (Short Videos)</center></h2>
+
+<form name="input" action="helloworld.php" onsubmit="return validateForm()" method="get">
+
+<fieldset>
+<legend><b>Basic Information</b></legend>
+URL: <input type="url" name="url"><br>
+Your UB Email: <input type="text" name="email"> <br>
+</fieldset>
+<br>
+<fieldset>
+<legend><b>Time Interval</b></legend>
+<i>Please locate a 3s-8s time interval.</i><br>
+Start Time: <input type="text" name="start_time"> (HH:MM:SS) <br>
+End Time: <input type="text" name="end_time"> (HH:MM:SS) <br>
+</fieldset>
+<br>
+<fieldset>
+<legend><b>Label the primary action in the time interval of the video</b></legend>
+<table border="1">
+<tr>
+<th>Adult</th>
+<th>Baby</th>
+<th>Ball</th>
+<th>Bird</th>
+<th>Car</th>
+<th>Cat</th>
+<th>Dog</th>
+</tr>
+<tr>
+<td>
+<input type = "radio" name="label" value="11">climbing<br>
+<input type = "radio" name="label" value="12">crawling<br>
+<input type = "radio" name="label" value="13">eating<br>
+<input type = "radio" name="label" value="15">jumping<br>
+<input type = "radio" name="label" value="16">rolling<br>
+<input type = "radio" name="label" value="17">running<br>
+<input type = "radio" name="label" value="18">walking<br>
+</td>
+<td>
+<input type = "radio" name="label" value="21">climbing<br>
+<input type = "radio" name="label" value="22">crawling<br>
+<input type = "radio" name="label" value="26">rolling<br>
+<input type = "radio" name="label" value="28">walking<br>
+</td>
+<td>
+<input type = "radio" name="label" value="34">flying<br>
+<input type = "radio" name="label" value="35">bouncing<br>
+<input type = "radio" name="label" value="36">rolling<br>
+</td>
+<td>
+<input type = "radio" name="label" value="41">climbing<br>
+<input type = "radio" name="label" value="43">eating<br>
+<input type = "radio" name="label" value="44">flying<br>
+<input type = "radio" name="label" value="45">jumping<br>
+<input type = "radio" name="label" value="46">rolling<br>
+<input type = "radio" name="label" value="48">walking<br>
+</td>
+<td>
+<input type = "radio" name="label" value="54">flying<br>
+<input type = "radio" name="label" value="55">bouncing<br>
+<input type = "radio" name="label" value="56">rolling<br>
+<input type = "radio" name="label" value="57">running<br>
+</td>
+<td>
+<input type = "radio" name="label" value="61">climbing<br>
+<input type = "radio" name="label" value="63">eating<br>
+<input type = "radio" name="label" value="65">jumping<br>
+<input type = "radio" name="label" value="66">rolling<br>
+<input type = "radio" name="label" value="67">running<br>
+<input type = "radio" name="label" value="68">walking<br>
+</td>
+<td>
+<input type = "radio" name="label" value="72">crawling<br>
+<input type = "radio" name="label" value="73">eating<br>
+<input type = "radio" name="label" value="75">jumping<br>
+<input type = "radio" name="label" value="76">rolling<br>
+<input type = "radio" name="label" value="77">running<br>
+<input type = "radio" name="label" value="78">walking<br>
+</td>
+</tr>
+</table>
+</fieldset>
+
+<center><p>Please verfiy your information before submit.</p></center>
+<center><input type="submit" value="Submit"></center>
+</form>
+
+<hr>
+<h2><center>Video Revisit</center></h2>
+<p>This is used to verify the cut clips.</p>
+
+<table border="1">
+<tr>
+<th>Adult</th>
+<th>Baby</th>
+<th>Ball</th>
+<th>Bird</th>
+<th>Car</th>
+<th>Cat</th>
+<th>Dog</th>
+</tr>
+<tr>
+<td>
+<a href="revisit/11.html">climbing</a><br>
+<a href="revisit/12.html">crawling</a><br>
+<a href="revisit/13.html">  eating</a><br>
+<a href="revisit/15.html"> jumping</a><br>
+<a href="revisit/16.html"> rolling</a><br>
+<a href="revisit/17.html"> running</a><br>
+<a href="revisit/18.html"> walking</a><br>
+</td>
+<td>
+<a href="revisit/21.html">climbing</a><br>
+<a href="revisit/22.html">crawling</a><br>
+<a href="revisit/26.html"> rolling</a><br>
+<a href="revisit/28.html"> walking</a><br>
+</td>
+<td>
+<a href="revisit/34.html">  flying</a><br>
+<a href="revisit/35.html">bouncing</a><br>
+<a href="revisit/36.html"> rolling</a><br>
+</td>
+<td>
+<a href="revisit/41.html">climbing</a><br>
+<a href="revisit/43.html">  eating</a><br>
+<a href="revisit/44.html">  flying</a><br>
+<a href="revisit/45.html"> jumping</a><br>
+<a href="revisit/46.html"> rolling</a><br>
+<a href="revisit/48.html"> walking</a><br>
+</td>
+<td>
+<a href="revisit/54.html">  flying</a><br>
+<a href="revisit/55.html">bouncing</a><br>
+<a href="revisit/56.html"> rolling</a><br>
+<a href="revisit/57.html"> running</a><br>
+</td>
+<td>
+<a href="revisit/61.html">climbing</a><br>
+<a href="revisit/63.html">  eating</a><br>
+<a href="revisit/65.html"> jumping</a><br>
+<a href="revisit/66.html"> rolling</a><br>
+<a href="revisit/67.html"> running</a><br>
+<a href="revisit/68.html"> walking</a><br>
+</td>
+<td>
+<a href="revisit/72.html">crawling</a><br>
+<a href="revisit/73.html">  eating</a><br>
+<a href="revisit/75.html"> jumping</a><br>
+<a href="revisit/76.html"> rolling</a><br>
+<a href="revisit/77.html"> running</a><br>
+<a href="revisit/78.html"> walking</a><br>
+</td>
+</tr>
+</table>
+
+<hr>
+<a href="dbstatus.php"><h2><center>Short Database Status</center></h2></a>
+<p>This is used to check the current status of our video collection database.</p>
+
+<hr>
+<h2><center>Work Progress</center></h2>
+<form name="work" action="work.php" onsubmit="return validateWorkForm()" method="get">
+Student Email: <input type="email" name="email_check">
+<input type="submit" value="Check">
+</form>
+<p>This is used to check the collection progress by individual student.
+
+</body>
+</html>
