@@ -33,7 +33,7 @@
 <h2>Fill out the information below to the best of your abilities</h2>
 <br>
 <p>Artifact Type</p>
-<form name="input" action="helloworld.php" onsubmit="printHello()" method="get">
+<form name="input" action="upload_picture.php" onsubmit="printHello()" method="post" enctype="multipart/form-data">
 <select id="objectType" onChange="changeVisibility()" >
 	<option name="Object_type" value="0">--Select a type--</option>
 	<option name="Object_type" value="1">Coin</option>
@@ -164,11 +164,10 @@ Notes<br><textarea id="description" cols="100" rows="2"></textarea>
 </table>
 </fieldset>
 
+<input type="file" name="myFile"/>
 
-<input type="file"> &#60=== add pictures </input>
-<br>
-<br>
 <input type="submit" value="Submit">
 </form>
+
 </body>
 </html>
